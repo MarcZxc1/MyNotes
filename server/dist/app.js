@@ -1,19 +1,26 @@
-import express from "express";
+import express, {} from "express";
 import noteRoutes from "./routes/note.routes.js";
 import cors from "cors";
 const app = express();
 app.use(cors({
-    // Origin must match exactly (no trailing slash).
-    origin: [
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "https://my-notes-git-main-marxc1s-projects.vercel.app",
-        "https://my-notes-iota-one.vercel.app",
-    ],
+    origin: (origin, callback) => {
+        // Allow local development and any Vercel subdomain
+        if (!origin ||
+            origin.startsWith("http://localhost") ||
+            origin.endsWith(".vercel.app")) {
+            callback(null, true);
+        }
+        else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
 }));
 app.use(express.json());
 app.use("/api/notes", noteRoutes);
+app.use("/health", (req, res) => {
+    res.send("<h4>Healthy!</h4>");
+});
 export default app;
 //# sourceMappingURL=app.js.map
