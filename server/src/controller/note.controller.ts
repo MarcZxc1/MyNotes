@@ -1,6 +1,5 @@
 import type { Request, Response } from "express";
 import { NoteService } from "../services/note.service.js";
-import { error } from "node:console";
 
 const noteService = new NoteService();
 

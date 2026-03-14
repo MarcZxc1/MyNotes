@@ -1,5 +1,4 @@
 import { NoteService } from "../services/note.service.js";
-import { error } from "node:console";
 const noteService = new NoteService();
 function areStringArraysEqual(a, b) {
     return a.length === b.length && a.every((value, index) => value === b[index]);
