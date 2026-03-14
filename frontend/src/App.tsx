@@ -5,7 +5,7 @@ import axios from "axios";
 import type { Note } from "./types /notes.type";
 import AddNoteModal, { type AddNotePayload } from "./components/AddNoteModal";
 
-const API_BASE_URL = "http://localhost:5000/api/notes";
+const VITE_API_BASE_URL = "https://mynotes-5p6n.onrender.com";
 
 function App() {
   const [notes, setNotes] = useState<Note[]>([]);
@@ -19,7 +19,7 @@ function App() {
   const fetchNotes = async () => {
     try {
       setError("");
-      const res = await axios.get<Note[]>(API_BASE_URL);
+      const res = await axios.get<Note[]>(VITE_API_BASE_URL);
       setNotes(res.data);
     } catch {
       setError("Failed to load notes");
@@ -37,7 +37,7 @@ function App() {
       setIsSubmitting(true);
       setSubmitError("");
 
-      await axios.post(API_BASE_URL, payload);
+      await axios.post(VITE_API_BASE_URL, payload);
       await fetchNotes();
       setIsModalOpen(false);
     } catch {
