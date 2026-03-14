@@ -14,8 +14,8 @@ function Card({ notes }: CardProps) {
           key={note.id}
           className="rounded-lg bg-[#404040] p4 text-center shadow "
         >
-          <h2 className="text-lg font-semibold text-white/90">{note.title}</h2>
-          <p className="mt-2 line-clamp-4 text-sm text-white/90 ">
+          <h2 className="text-lg font-semibold text-white">{note.title}</h2>
+          <p className="mt-2 line-clamp-4 text-sm text-white ">
             {note.content}
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
