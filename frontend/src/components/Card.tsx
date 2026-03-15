@@ -21,10 +21,10 @@ function Card({ notes }: CardProps) {
       {notes.map((note) => (
         <article
           key={note.id}
-          className="rounded-lg bg-[#404040] p4 text-center shadow "
+          className="rounded-lg bg-white text-center shadow "
         >
-          <h2 className="text-lg font-semibold text-white">{note.title}</h2>
-          <p className="mt-2 line-clamp-4 text-sm text-white ">
+          <h2 className="text-lg font-semibold text-black">{note.title}</h2>
+          <p className="mt-2 line-clamp-4 text-sm text-black ">
             {note.content}
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
