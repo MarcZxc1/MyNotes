@@ -53,7 +53,7 @@ function App() {
       <section className="mx-auto w-full max-w-5xl rounded-xl bg-white p-4 backdrop-blur sm:p-6 md:p-10">
         <div className="grid grid-cols-3 items-center">
           <div />
-          <h1 className="text-center text-base font-bold  text-white sm:text-xl md:text-3xl">
+          <h1 className="text-center text-base font-bold  text-black sm:text-xl md:text-3xl">
             Notes
           </h1>
           <div className="justify-self-end">
