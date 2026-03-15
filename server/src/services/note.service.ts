@@ -47,6 +47,10 @@ export class NoteService {
     });
   }
 
+  async deleteAllnotes() {
+    return prisma.note.deleteMany();
+  }
+
   async getNoteById(id: string) {
     return prisma.note.findUnique({
       where: {
