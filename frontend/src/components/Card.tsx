@@ -5,7 +5,16 @@ type CardProps = {
 };
 function Card({ notes }: CardProps) {
   if (notes.length === 0) {
-    return <p className="mt-6 text-white/90">No notes yet </p>;
+    return (
+      /* Added min-h-[50vh] to give it space to center vertically, 
+     or use h-full if the parent has a fixed height */
+      <div className="mt-6 grid min-h-[50vh] w-full place-items-center text-center">
+        <p className="text-white/90 text-lg md:text-xl font-medium">
+          No notes yet
+        </p>
+        {/* Optional: you can add a sub-text or icon here */}
+      </div>
+    );
   }
   return (
     <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
