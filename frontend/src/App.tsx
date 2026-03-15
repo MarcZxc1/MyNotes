@@ -61,7 +61,7 @@ function App() {
               type="button"
               onClick={() => setIsModalOpen(true)}
               className="
-    rounded-md bg-white text-black font-semibold
+    rounded-md bg-black text-white font-semibold
     px-2.5 py-1.5 text-xs
     sm:px-3 sm:py-2 sm:text-sm
     md:px-4 md:py-2 md:text-base
