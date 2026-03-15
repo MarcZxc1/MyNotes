@@ -50,7 +50,7 @@ function App() {
 
   return (
     <main className="min-h-screen w-full  bg-[#000000] px-4 py-8 sm:px-6 md:px-10  ">
-      <section className="mx-auto w-full max-w-5xl rounded-xl bg-white/10 p-4 backdrop-blur sm:p-6 md:p-10">
+      <section className="mx-auto w-full max-w-5xl rounded-xl bg-white p-4 backdrop-blur sm:p-6 md:p-10">
         <div className="grid grid-cols-3 items-center">
           <div />
           <h1 className="text-center text-base font-bold  text-white sm:text-xl md:text-3xl">
