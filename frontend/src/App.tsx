@@ -76,9 +76,29 @@ function App() {
         </div>
       </section>
 
-      {loading && <p className="mt-4 text-white ">Loading...</p>}
-      {error && <p className="mt-4 text-red-300">{error}</p>}
-      {!loading && !error && <Card notes={notes} />}
+      <div className="mx-auto mt-6 w-full max-w-5xl">
+        {loading && (
+          <div className="grid min-h-[40vh] place-items-center text-center">
+            <p
+              className="text-white text-5xl md:text-6xl animation-wave "
+              style={{ animationDelay: "0s" }}
+            >
+              ...
+            </p>
+          </div>
+        )}
+
+        {!loading && error && (
+          <div
+            className="grid min-h-[40vh] place-items-center text-center animation-wave"
+            style={{ animationDelay: "0.3s" }}
+          >
+            <p className="text-red-300 text-xs sm:text-lg">{error}</p>
+          </div>
+        )}
+
+        {!loading && !error && <Card notes={notes} />}
+      </div>
 
       <AddNoteModal
         isOpen={isModalOpen}
