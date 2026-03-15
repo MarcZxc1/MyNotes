@@ -1,4 +1,3 @@
 node_modules/
-
-/src/generated/prisma
-.env
+../Phase1//node_modules/
+/src/generated/prisma`.env
