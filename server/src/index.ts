@@ -10,6 +10,8 @@ setInterval(
       console.log(
         `Self-ping status: ${response.status} - Keep-alive successful`,
       );
+      const data = await response.json();
+      console.log("Status: ", data);
     } catch (error) {
       console.error("Self-ping failed: ", error);
     }

@@ -28,7 +28,9 @@ app.use(express.json());
 app.use("/api/notes", noteRoutes);
 
 app.use("/health", (req: Request, res: Response) => {
-  res.send("<h4>Healthy!</h4>");
+  res.status(200).json({
+    message: "Healthy!",
+  });
 });
 
 export default app;
