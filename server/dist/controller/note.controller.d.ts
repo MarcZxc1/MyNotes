@@ -5,5 +5,6 @@ export declare class NoteController {
     getNoteByid(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     updateByID(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     deleteByID(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    deleteAllRecords(req: Request, res: Response): Promise<void>;
 }
 //# sourceMappingURL=note.controller.d.ts.map

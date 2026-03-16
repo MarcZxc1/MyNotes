@@ -40,6 +40,7 @@ export declare class NoteService {
         createAt: Date;
         updatedAt: Date;
     }>;
+    deleteAllnotes(): Promise<import("@prisma/client").Prisma.BatchPayload>;
     getNoteById(id: string): Promise<{
         id: string;
         title: string;
