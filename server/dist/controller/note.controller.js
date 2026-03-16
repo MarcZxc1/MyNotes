@@ -113,5 +113,19 @@ export class NoteController {
             return res.status(500).json({ error: "Failed to delete the note" });
         }
     }
+    async deleteAllRecords(req, res) {
+        try {
+            const result = await noteService.deleteAllnotes();
+            res.status(200).json({
+                message: "All records were deleted",
+                count: result.count,
+            });
+        }
+        catch (error) {
+            res.status(500).json({
+                message: "Failed to delete all notes",
+            });
+        }
+    }
 }
 //# sourceMappingURL=note.controller.js.map

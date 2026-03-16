@@ -11,6 +11,9 @@ router.get("/", (req, res) => {
 router.put("/:id", (req, res) => {
     void noteController.updateByID(req, res);
 });
+router.delete("/deleteAll", (req, res) => {
+    void noteController.deleteAllRecords(req, res);
+});
 router.delete("/:id", (req, res) => {
     void noteController.deleteByID(req, res);
 });

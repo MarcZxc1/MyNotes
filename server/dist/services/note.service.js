@@ -27,6 +27,9 @@ export class NoteService {
             where: { id },
         });
     }
+    async deleteAllnotes() {
+        return prisma.note.deleteMany();
+    }
     async getNoteById(id) {
         return prisma.note.findUnique({
             where: {
