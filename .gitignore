@@ -1,3 +1,5 @@
 node_modules/
 ../Phase1//node_modules/
 /src/generated/prisma`.env
+
+/server/dist/
