@@ -1,7 +1,7 @@
-import dotenv from "dotenv";
+import "dotenv/config";
 import app from "./app.js";
 
-const URL = "https://mynotes-5p6n.onrender.com/health";
+const URL = process.env.RENDER_URL || "";
 
 setInterval(
   async () => {
