@@ -1,16 +1,13 @@
 import { prisma } from "../lib/prisma.js";
 
-type CreateNoteInput = {
+type NotePayload = {
   title: string;
   content: string;
-  tags?: string[];
+  tags: string[];
 };
 
-type UpdateNoteInput = {
-  title?: string;
-  content?: string;
-  tags?: string[];
-};
+type CreateNoteInput = Omit<NotePayload, "tags"> & { tags?: string[] };
+type UpdateNoteInput = Partial<NotePayload>;
 
 export class NoteService {
   async createNote(data: CreateNoteInput) {
@@ -31,10 +28,7 @@ export class NoteService {
     });
   }
 
-  async updateNotes(
-    id: string,
-    data: { title?: string; content?: string; tags?: string[] },
-  ) {
+  async updateNotes(id: string, data: UpdateNoteInput) {
     return prisma.note.update({
       where: { id },
       data,
