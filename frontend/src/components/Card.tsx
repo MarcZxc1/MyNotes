@@ -29,14 +29,14 @@ function Card({ notes, onEdit, onDelete }: CardProps) {
           <div className="absolute right-2 top-2 flex gap-1 opacity-100 transition-opacity md:opacity-0 md:group-hover:opacity-100">
             <button
               onClick={() => onEdit(note.id)}
-              className="rounded-md p-1.5 text-black hover:bg-blue-500 hover:text-blue-600 transition-colors"
+              className="rounded-md p-1.5 text-black hover:bg-blue-50 hover:text-blue-600 transition-colors"
               title="Edit Note"
             >
               <Edit2 size={16} />
             </button>
             <button
               onClick={() => onDelete(note.id)}
-              className="rounded-md p-1.5 text-black hover:bg-red-500 hover:text-red-600 transition-colors"
+              className="rounded-md p-1.5 text-black hover:bg-red-50 hover:text-red-600 transition-colors"
               title="Delete Note"
             >
               <Trash2 size={16} />
