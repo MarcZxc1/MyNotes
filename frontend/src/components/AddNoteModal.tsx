@@ -1,5 +1,9 @@
 import { useEffect, useState, type FormEvent } from "react";
-import type { AddNotePayload, AddNoteModalProps } from "../types /notes.type";
+import type {
+  AddNoteModalProps,
+  CreateNotePayload,
+  UpdateNotePayload,
+} from "../types /notes.type";
 
 function AddNoteModal({
   isOpen,
@@ -7,6 +11,7 @@ function AddNoteModal({
   submitError,
   onClose,
   onSubmit,
+  initialData,
 }: AddNoteModalProps) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -25,33 +30,77 @@ function AddNoteModal({
   }, [isOpen, onClose]);
 
   useEffect(() => {
-    if (isOpen) {
-      setTitle("");
-      setContent("");
-      setTagsInput("");
-      setLocalError("");
-    }
-  }, [isOpen]);
+    if (!isOpen) return;
+
+    setTitle(initialData?.title ?? "");
+    setContent(initialData?.content ?? "");
+    setTagsInput(initialData?.tags.join(", ") ?? "");
+    setLocalError("");
+  }, [isOpen, initialData]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!title.trim() || !content.trim()) {
-      setLocalError("Title and content are required.");
-      return;
-    }
-
-    const tags = tagsInput
+    const nextTitle = title.trim();
+    const nextContent = content.trim();
+    const nextTags = tagsInput
       .split(",")
       .map((tag) => tag.trim())
       .filter(Boolean);
 
+    if (!initialData) {
+      if (!nextTitle || !nextContent) {
+        setLocalError("Title and content are required.");
+        return;
+      }
+
+      const createPayload: CreateNotePayload = {
+        title: nextTitle,
+        content: nextContent,
+        tags: nextTags,
+      };
+
+      setLocalError("");
+      await onSubmit(createPayload);
+      return;
+    }
+
+    if (nextTitle === "") {
+      setLocalError("Title cannot be empty.");
+      return;
+    }
+
+    if (nextContent === "") {
+      setLocalError("Content cannot be empty.");
+      return;
+    }
+
+    const updatePayload: UpdateNotePayload = {};
+
+    if (nextTitle !== initialData.title) {
+      updatePayload.title = nextTitle;
+    }
+
+    if (nextContent !== initialData.content) {
+      updatePayload.content = nextContent;
+    }
+
+    const initialTags = initialData.tags;
+    const tagsChanged =
+      nextTags.length !== initialTags.length ||
+      nextTags.some((tag, index) => tag !== initialTags[index]);
+
+    if (tagsChanged) {
+      updatePayload.tags = nextTags;
+    }
+
+    if (Object.keys(updatePayload).length === 0) {
+      setLocalError("No changes detected.");
+      return;
+    }
+
     setLocalError("");
-    await onSubmit({
-      title: title.trim(),
-      content: content.trim(),
-      tags,
-    });
+    await onSubmit(updatePayload);
   };
 
   if (!isOpen) return null;
@@ -65,7 +114,9 @@ function AddNoteModal({
         className="w-full max-w-lg rounded-xl bg-[#161616] p-5 text-left shadow-xl"
         onClick={(event) => event.stopPropagation()}
       >
-        <h2 className="text-xl font-semibold text-white">Create Note</h2>
+        <h2 className="text-xl font-semibold text-white">
+          {initialData ? "Update Note" : "Create Note"}
+        </h2>
 
         <form className="mt-4 space-y-4" onSubmit={handleSubmit}>
           <div>
@@ -128,7 +179,7 @@ function AddNoteModal({
               disabled={isSubmitting}
               className="rounded-md bg-white px-4 py-2 text-sm font-semibold text-black transition hover:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-70"
             >
-              {isSubmitting ? "Saving..." : "Save Note"}
+              {isSubmitting ? "Saving..." : initialData ? "Update Note" : "Save Note"}
             </button>
           </div>
         </form>
@@ -138,4 +189,3 @@ function AddNoteModal({
 }
 
 export default AddNoteModal;
-export type { AddNotePayload };

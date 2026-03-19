@@ -3,11 +3,14 @@ import { NoteService } from "../services/note.service.js";
 
 const noteService = new NoteService();
 
-type UpdateNoteBody = {
-  title?: unknown;
-  content?: unknown;
-  tags?: unknown;
+type NotePayload = {
+  title: string;
+  content: string;
+  tags: string[];
 };
+
+type UpdateNoteInput = Partial<NotePayload>;
+type UpdateNoteBody = Partial<Record<keyof NotePayload, unknown>>;
 
 function areStringArraysEqual(a: string[], b: string[]) {
   return a.length === b.length && a.every((value, index) => value === b[index]);
@@ -73,19 +76,22 @@ export class NoteController {
       }
 
       const body = req.body as UpdateNoteBody;
-      const updateData: { title?: string; content?: string; tags?: string[] } =
-        {};
+      const updateData: UpdateNoteInput = {};
 
       if (typeof body.title === "string") {
-        updateData.title = body.title.trim();
-      }
-
-      if (body.title == "") {
-        return res.json({ error: "dasdsadsd" });
+        const title = body.title.trim();
+        if (title.length === 0) {
+          return res.status(400).json({ error: "Title cannot be empty" });
+        }
+        updateData.title = title;
       }
 
       if (typeof body.content === "string") {
-        updateData.content = body.content.trim();
+        const content = body.content.trim();
+        if (content.length === 0) {
+          return res.status(400).json({ error: "Content cannot be empty" });
+        }
+        updateData.content = content;
       }
 
       if (
@@ -157,7 +163,7 @@ export class NoteController {
         message: "All records were deleted",
         count: result.count,
       });
-    } catch (error) {
+    } catch {
       res.status(500).json({
         message: "Failed to delete all notes",
       });

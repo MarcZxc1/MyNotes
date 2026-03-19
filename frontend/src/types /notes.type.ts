@@ -7,16 +7,20 @@ export type Note = {
   updateAt: string;
 };
 
-export type AddNotePayload = {
+export type NotePayload = {
   title: string;
   content: string;
   tags: string[];
 };
+
+export type CreateNotePayload = NotePayload;
+export type UpdateNotePayload = Partial<NotePayload>;
 
 export type AddNoteModalProps = {
   isOpen: boolean;
   isSubmitting: boolean;
   submitError: string;
   onClose: () => void;
-  onSubmit: (payload: AddNotePayload) => Promise<void>;
+  onSubmit: (payload: CreateNotePayload | UpdateNotePayload) => Promise<void>;
+  initialData?: Note;
 };
