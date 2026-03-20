@@ -109,6 +109,18 @@ function App() {
       </section>
 
       <div className="mx-auto mt-6 w-full max-w-5xl">
+        {loading && (
+          <div className="flex items-center justify-center py-10">
+            <p className="text-sm text-white sm:text-base">Loading notes...</p>
+          </div>
+        )}
+
+        {!loading && error && (
+          <div className="flex items-center justify-center py-10">
+            <p className="text-sm text-red-300 sm:text-base">{error}</p>
+          </div>
+        )}
+
         {!loading && !error && (
           <Card
             notes={notes}
