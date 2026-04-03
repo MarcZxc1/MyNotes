@@ -3,14 +3,17 @@ export type Note = {
   title: string;
   content: string;
   tags: string[];
-  createdAt: string;
-  updateAt: string;
+  createAt: string;
+  updatedAt: string;
+  createdAt?: string;
+  updateAt?: string;
 };
 
 export type NotePayload = {
   title: string;
   content: string;
   tags: string[];
+  createdAt: string;
 };
 
 export type CreateNotePayload = NotePayload;
