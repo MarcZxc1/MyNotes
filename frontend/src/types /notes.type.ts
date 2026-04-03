@@ -13,7 +13,7 @@ export type NotePayload = {
   title: string;
   content: string;
   tags: string[];
-  createdAt: string;
+  createdAt?: string;
 };
 
 export type CreateNotePayload = NotePayload;
