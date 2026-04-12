@@ -71,7 +71,7 @@ function Card({ notes, onEdit, onDelete }: CardProps) {
               </p>
             )}
 
-            <p className="mt-2 line-clamp-4 text-sm text-gray-600 leading-relaxed">
+            <p className="mt-2 max-h-40 overflow-y-auto text-sm text-gray-600 leading-relaxed transition whitespace-pre-wrap break-words">
               {note.content}
             </p>
 
